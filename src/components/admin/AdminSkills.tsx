@@ -33,7 +33,7 @@ export default function AdminSkills() {
       {editing && (
         <div className="glass-card p-6 mb-6 space-y-4">
           <div className="flex justify-between"><h3 className="font-semibold text-sm">{editing.id ? "Edit" : "New"} Skill</h3><button onClick={() => setEditing(null)}><X className="w-4 h-4 text-muted-foreground" /></button></div>
-          {[{ key: "name", label: "Name" }, { key: "category", label: "Category" }, { key: "icon", label: "Icon (emoji)" }, { key: "sort_order", label: "Sort Order", type: "number" }].map((f) => (
+          {[{ key: "name", label: "Name" }, { key: "category", label: "Category" }, { key: "icon", label: "Icon Name (Lucide, e.g. Code, Globe, Database)" }, { key: "sort_order", label: "Sort Order", type: "number" }].map((f) => (
             <div key={f.key}>
               <label className="text-xs font-medium text-muted-foreground mb-1 block">{f.label}</label>
               <input type={f.type || "text"} value={(editing as any)[f.key] ?? ""} onChange={(e) => setEditing({ ...editing, [f.key]: f.type === "number" ? parseInt(e.target.value) || 0 : e.target.value })} className="w-full px-3 py-2 rounded-lg bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />

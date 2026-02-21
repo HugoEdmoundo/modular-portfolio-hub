@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/portfolio/Navbar";
 import HeroSection from "@/components/portfolio/HeroSection";
@@ -20,6 +21,22 @@ import {
 
 const Index = () => {
   const { data: config } = useQuery({ queryKey: ["site-config"], queryFn: fetchSiteConfig });
+
+  // Dynamic favicon and tab title from site config
+  useEffect(() => {
+    if (config?.hero_name) {
+      document.title = config.hero_name;
+    }
+    if (config?.favicon_url) {
+      let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = config.favicon_url;
+    }
+  }, [config?.hero_name, config?.favicon_url]);
   const { data: projects } = useQuery({ queryKey: ["featured-projects"], queryFn: fetchFeaturedProjects });
   const { data: skills } = useQuery({ queryKey: ["skills"], queryFn: fetchSkills });
   const { data: gallery } = useQuery({ queryKey: ["gallery"], queryFn: fetchGallery });
