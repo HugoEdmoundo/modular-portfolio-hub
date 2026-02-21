@@ -50,6 +50,7 @@ export type Database = {
           degree: string | null
           id: string
           institution: string
+          logo_url: string | null
           sort_order: number | null
           year: string | null
         }
@@ -58,6 +59,7 @@ export type Database = {
           degree?: string | null
           id?: string
           institution: string
+          logo_url?: string | null
           sort_order?: number | null
           year?: string | null
         }
@@ -66,6 +68,7 @@ export type Database = {
           degree?: string | null
           id?: string
           institution?: string
+          logo_url?: string | null
           sort_order?: number | null
           year?: string | null
         }
@@ -78,6 +81,7 @@ export type Database = {
           description: string | null
           duration: string | null
           id: string
+          logo_url: string | null
           role: string | null
           sort_order: number | null
         }
@@ -87,6 +91,7 @@ export type Database = {
           description?: string | null
           duration?: string | null
           id?: string
+          logo_url?: string | null
           role?: string | null
           sort_order?: number | null
         }
@@ -96,6 +101,7 @@ export type Database = {
           description?: string | null
           duration?: string | null
           id?: string
+          logo_url?: string | null
           role?: string | null
           sort_order?: number | null
         }

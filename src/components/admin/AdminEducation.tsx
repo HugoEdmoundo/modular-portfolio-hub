@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchEducation, upsertEducation, deleteEducation, type Education } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Trash2, Save, X } from "lucide-react";
+import { Plus, Trash2, Save, X, Upload } from "lucide-react";
+import { uploadMedia } from "@/lib/api";
 
 export default function AdminEducation() {
   const queryClient = useQueryClient();
@@ -25,16 +26,32 @@ export default function AdminEducation() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold">Education</h2>
-        <button onClick={() => setEditing({ institution: "", degree: "", year: "", sort_order: 0 })} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium"><Plus className="w-4 h-4" /> Add</button>
+        <button onClick={() => setEditing({ institution: "", degree: "", year: "", logo_url: "", sort_order: 0 })} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium"><Plus className="w-4 h-4" /> Add</button>
       </div>
 
       {editing && (
         <div className="glass-card p-6 mb-6 space-y-4">
           <div className="flex justify-between"><h3 className="font-semibold text-sm">{editing.id ? "Edit" : "New"}</h3><button onClick={() => setEditing(null)}><X className="w-4 h-4 text-muted-foreground" /></button></div>
-          {[{ key: "institution", label: "Institution" }, { key: "degree", label: "Degree" }, { key: "year", label: "Year" }, { key: "sort_order", label: "Sort Order", type: "number" }].map((f) => (
+          {[{ key: "institution", label: "Institution" }, { key: "degree", label: "Degree" }, { key: "year", label: "Year" }, { key: "logo_url", label: "Logo URL", uploadable: true }, { key: "sort_order", label: "Sort Order", type: "number" }].map((f: any) => (
             <div key={f.key}>
               <label className="text-xs font-medium text-muted-foreground mb-1 block">{f.label}</label>
-              <input type={f.type || "text"} value={(editing as any)[f.key] ?? ""} onChange={(e) => setEditing({ ...editing, [f.key]: f.type === "number" ? parseInt(e.target.value) || 0 : e.target.value })} className="w-full px-3 py-2 rounded-lg bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+              <div className="flex gap-2">
+                <input type={f.type || "text"} value={(editing as any)[f.key] ?? ""} onChange={(e) => setEditing({ ...editing, [f.key]: f.type === "number" ? parseInt(e.target.value) || 0 : e.target.value })} className="flex-1 px-3 py-2 rounded-lg bg-secondary border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                {f.uploadable && (
+                  <label className="shrink-0 px-3 py-2 rounded-lg bg-secondary border border-border text-sm cursor-pointer hover:bg-muted transition-colors flex items-center gap-1">
+                    <Upload className="w-3.5 h-3.5" />
+                    <input type="file" className="hidden" accept="image/*" onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        try {
+                          const url = await uploadMedia(file, `education/logo-${Date.now()}`);
+                          setEditing({ ...editing, [f.key]: url });
+                        } catch {}
+                      }
+                    }} />
+                  </label>
+                )}
+              </div>
             </div>
           ))}
           <button onClick={() => saveMutation.mutate(editing as any)} disabled={saveMutation.isPending} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"><Save className="w-4 h-4" /> Save</button>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { icons } from "lucide-react";
 import type { Skill } from "@/lib/api";
 
 interface SkillsSectionProps {
@@ -38,7 +39,10 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
                       transition={{ delay: i * 0.03 }}
                       className="glass-card px-4 py-2 text-sm font-medium hover-lift flex items-center gap-2"
                     >
-                      {skill.icon && <span className="text-lg">{skill.icon}</span>}
+                      {skill.icon && (() => {
+                        const LucideIcon = icons[skill.icon as keyof typeof icons];
+                        return LucideIcon ? <LucideIcon className="w-4 h-4" /> : <span className="text-lg">{skill.icon}</span>;
+                      })()}
                       {skill.name}
                     </motion.div>
                   ))}

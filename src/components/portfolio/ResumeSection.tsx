@@ -39,7 +39,11 @@ export default function ResumeSection({ education, experience }: ResumeSectionPr
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+                    {(edu as any).logo_url ? (
+                      <img src={(edu as any).logo_url} alt={edu.institution} className="absolute -left-[35px] top-0 w-5 h-5 rounded-full object-cover border-2 border-background" />
+                    ) : (
+                      <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+                    )}
                     <p className="text-xs font-mono text-primary mb-1">{edu.year}</p>
                     <h4 className="font-medium text-sm">{edu.degree}</h4>
                     <p className="text-sm text-muted-foreground">{edu.institution}</p>
@@ -65,7 +69,11 @@ export default function ResumeSection({ education, experience }: ResumeSectionPr
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+                    {(exp as any).logo_url ? (
+                      <img src={(exp as any).logo_url} alt={exp.company} className="absolute -left-[35px] top-0 w-5 h-5 rounded-full object-cover border-2 border-background" />
+                    ) : (
+                      <div className="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+                    )}
                     <p className="text-xs font-mono text-primary mb-1">{exp.duration}</p>
                     <h4 className="font-medium text-sm">{exp.role}</h4>
                     <p className="text-sm text-muted-foreground">{exp.company}</p>
