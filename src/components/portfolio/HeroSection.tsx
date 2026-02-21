@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { Download, icons } from "lucide-react";
 import type { SiteConfig } from "@/lib/api";
 
 interface HeroSectionProps {
   config: SiteConfig | null;
+  socialLinks?: { id: string; platform: string; url: string; icon: string; sort_order: number }[];
 }
 
-export default function HeroSection({ config }: HeroSectionProps) {
+export default function HeroSection({ config, socialLinks = [] }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-padding">
       {/* Background effects */}
@@ -64,19 +65,21 @@ export default function HeroSection({ config }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex items-center justify-center gap-4"
         >
-          {config?.github_username && (
-            <a
-              href={`https://github.com/${config.github_username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-card p-3 hover-lift text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-          )}
-          <a href="#contact" className="glass-card p-3 hover-lift text-muted-foreground hover:text-primary transition-colors">
-            <Mail className="w-5 h-5" />
-          </a>
+          {socialLinks.map((link) => {
+            const LucideIcon = (icons as any)[link.icon];
+            return (
+              <a
+                key={link.id}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-3 hover-lift text-muted-foreground hover:text-primary transition-colors"
+                title={link.platform}
+              >
+                {LucideIcon ? <LucideIcon className="w-5 h-5" /> : <span className="text-xs">{link.platform}</span>}
+              </a>
+            );
+          })}
           {config?.cv_url && (
             <a
               href={config.cv_url}
