@@ -266,6 +266,33 @@ export type Database = {
         }
         Relationships: []
       }
+      social_links: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          platform: string
+          sort_order: number | null
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string
+          id?: string
+          platform: string
+          sort_order?: number | null
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          platform?: string
+          sort_order?: number | null
+          url?: string
+        }
+        Relationships: []
+      }
       tasks: {
         Row: {
           created_at: string

@@ -204,6 +204,30 @@ export async function uploadMedia(file: File, path: string) {
   return urlData.publicUrl;
 }
 
+// Social Links
+export async function fetchSocialLinks() {
+  const { data, error } = await supabase.from("social_links").select("*").order("sort_order");
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function upsertSocialLink(link: any) {
+  if (link.id) {
+    const { id, ...rest } = link;
+    const { data, error } = await supabase.from("social_links").update(rest).eq("id", id).select().single();
+    if (error) throw error;
+    return data;
+  }
+  const { data, error } = await supabase.from("social_links").insert(link).select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteSocialLink(id: string) {
+  const { error } = await supabase.from("social_links").delete().eq("id", id);
+  if (error) throw error;
+}
+
 export async function checkIsAdmin() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return false;
