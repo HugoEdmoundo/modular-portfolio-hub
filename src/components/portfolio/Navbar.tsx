@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSiteConfig } from "@/lib/api";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -13,6 +15,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { data: config } = useQuery({ queryKey: ["site-config"], queryFn: fetchSiteConfig });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dark, setDark] = useState(() => {
     if (typeof window !== "undefined") {
@@ -40,7 +43,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card-strong border-b border-border/30">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="font-bold text-lg gradient-text">
-          Portfolio
+          {config?.site_name || "Portfolio"}
         </Link>
 
         {/* Desktop nav */}

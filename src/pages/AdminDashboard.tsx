@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/hooks/use-auth";
 import { checkIsAdmin } from "@/lib/api";
-import { LogOut, Settings, FolderOpen, Palette, FileText, GraduationCap, Briefcase, Image, ListTodo, BookOpen, Home } from "lucide-react";
+import { LogOut, Settings, FolderOpen, Palette, FileText, GraduationCap, Briefcase, Image, ListTodo, BookOpen, Home, UserCog, Share2 } from "lucide-react";
 import AdminSiteConfig from "@/components/admin/AdminSiteConfig";
 import AdminProjects from "@/components/admin/AdminProjects";
 import AdminSkills from "@/components/admin/AdminSkills";
@@ -11,6 +11,8 @@ import AdminTasks from "@/components/admin/AdminTasks";
 import AdminEducation from "@/components/admin/AdminEducation";
 import AdminExperience from "@/components/admin/AdminExperience";
 import AdminBlog from "@/components/admin/AdminBlog";
+import AdminAccount from "@/components/admin/AdminAccount";
+import AdminSocialLinks from "@/components/admin/AdminSocialLinks";
 
 const tabs = [
   { id: "config", label: "Site Config", icon: Settings },
@@ -21,6 +23,8 @@ const tabs = [
   { id: "education", label: "Education", icon: GraduationCap },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "blog", label: "Blog", icon: BookOpen },
+  { id: "social", label: "Social Links", icon: Share2 },
+  { id: "account", label: "Account", icon: UserCog },
 ];
 
 export default function AdminDashboard() {
@@ -122,6 +126,8 @@ export default function AdminDashboard() {
           {activeTab === "education" && <AdminEducation />}
           {activeTab === "experience" && <AdminExperience />}
           {activeTab === "blog" && <AdminBlog />}
+          {activeTab === "social" && <AdminSocialLinks />}
+          {activeTab === "account" && <AdminAccount />}
         </main>
       </div>
     </div>

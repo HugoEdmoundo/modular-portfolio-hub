@@ -1,3 +1,4 @@
+
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/portfolio/Navbar";
 import HeroSection from "@/components/portfolio/HeroSection";
@@ -16,6 +17,7 @@ import {
   fetchTasks,
   fetchEducation,
   fetchExperience,
+  fetchSocialLinks,
 } from "@/lib/api";
 
 const Index = () => {
@@ -26,11 +28,12 @@ const Index = () => {
   const { data: tasks } = useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
   const { data: education } = useQuery({ queryKey: ["education"], queryFn: fetchEducation });
   const { data: experience } = useQuery({ queryKey: ["experience"], queryFn: fetchExperience });
+  const { data: socialLinks } = useQuery({ queryKey: ["social-links"], queryFn: fetchSocialLinks });
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <HeroSection config={config ?? null} />
+      <HeroSection config={config ?? null} socialLinks={socialLinks ?? []} />
       <AboutSection config={config ?? null} />
       <ProjectsSection projects={projects ?? []} />
       <GitHubSection username={config?.github_username ?? undefined} />
