@@ -45,6 +45,9 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
+
+            rsync -avz --delete ./dist/ root@${{ secrets.VPS_HOST }}:/opt/main/
+
             chown -R www-data:www-data /opt/main
             chmod -R 755 /opt/main
             systemctl reload nginx
