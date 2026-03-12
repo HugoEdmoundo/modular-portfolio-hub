@@ -57,6 +57,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/assignments"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Assignments
+          </Link>
           <button
             onClick={toggleTheme}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
