@@ -39,7 +39,7 @@ const Index = () => {
       <GitHubSection username={config?.github_username ?? undefined} />
       <SkillsSection skills={skills ?? []} />
       <GallerySection items={gallery ?? []} />
-      <TasksSection tasks={tasks ?? []} />
+      
       <ResumeSection education={education ?? []} experience={experience ?? []} />
       
       {/* Footer */}

@@ -10,9 +10,9 @@ const navLinks = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Tasks", href: "#tasks" },
   { label: "Resume", href: "#resume" },
 ];
+
 
 export default function Navbar() {
   const { data: config } = useQuery({ queryKey: ["site-config"], queryFn: fetchSiteConfig });
