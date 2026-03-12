@@ -14,7 +14,7 @@ import {
   fetchFeaturedProjects,
   fetchSkills,
   fetchGallery,
-  fetchTasks,
+  
   fetchEducation,
   fetchExperience,
   fetchSocialLinks,
