@@ -7,7 +7,7 @@ import ProjectsSection from "@/components/portfolio/ProjectsSection";
 import GitHubSection from "@/components/portfolio/GitHubSection";
 import SkillsSection from "@/components/portfolio/SkillsSection";
 import GallerySection from "@/components/portfolio/GallerySection";
-import TasksSection from "@/components/portfolio/TasksSection";
+
 import ResumeSection from "@/components/portfolio/ResumeSection";
 import {
   fetchSiteConfig,
