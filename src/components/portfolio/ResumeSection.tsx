@@ -9,11 +9,11 @@ interface ResumeSectionProps {
 }
 
 export default function ResumeSection({ education, experience }: ResumeSectionProps) {
-  if (education.length === 0 && experience.length === 0) return null;
-
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  if (education.length === 0 && experience.length === 0) return null;
 
   return (
     <section id="resume" ref={ref} className="section-padding relative overflow-hidden">

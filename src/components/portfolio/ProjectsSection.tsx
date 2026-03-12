@@ -8,11 +8,11 @@ interface ProjectsSectionProps {
 }
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
-  if (projects.length === 0) return null;
-
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  if (projects.length === 0) return null;
 
   return (
     <section id="projects" ref={ref} className="section-padding relative overflow-hidden">

@@ -7,12 +7,12 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ config }: AboutSectionProps) {
-  if (!config?.about_text) return null;
-
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const bgY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+
+  if (!config?.about_text) return null;
 
   return (
     <section id="about" ref={ref} className="section-padding relative overflow-hidden">

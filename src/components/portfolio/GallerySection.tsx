@@ -7,11 +7,11 @@ interface GallerySectionProps {
 }
 
 export default function GallerySection({ items }: GallerySectionProps) {
-  if (items.length === 0) return null;
-
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  if (items.length === 0) return null;
 
   return (
     <section id="gallery" ref={ref} className="section-padding relative overflow-hidden">

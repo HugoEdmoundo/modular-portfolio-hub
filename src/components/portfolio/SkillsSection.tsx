@@ -8,12 +8,12 @@ interface SkillsSectionProps {
 }
 
 export default function SkillsSection({ skills }: SkillsSectionProps) {
-  if (skills.length === 0) return null;
-
   const categories = [...new Set(skills.map((s) => s.category))];
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  if (skills.length === 0) return null;
 
   return (
     <section id="skills" ref={ref} className="section-padding relative overflow-hidden">

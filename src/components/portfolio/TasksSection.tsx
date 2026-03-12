@@ -14,11 +14,11 @@ const statusConfig: Record<string, { icon: typeof CheckCircle; color: string; bg
 };
 
 export default function TasksSection({ tasks }: TasksSectionProps) {
-  if (tasks.length === 0) return null;
-
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  if (tasks.length === 0) return null;
 
   return (
     <section id="tasks" ref={ref} className="section-padding relative overflow-hidden">
