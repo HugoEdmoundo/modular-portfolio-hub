@@ -25,7 +25,7 @@ const Index = () => {
   const { data: projects } = useQuery({ queryKey: ["featured-projects"], queryFn: fetchFeaturedProjects });
   const { data: skills } = useQuery({ queryKey: ["skills"], queryFn: fetchSkills });
   const { data: gallery } = useQuery({ queryKey: ["gallery"], queryFn: fetchGallery });
-  const { data: tasks } = useQuery({ queryKey: ["tasks"], queryFn: fetchTasks });
+  
   const { data: education } = useQuery({ queryKey: ["education"], queryFn: fetchEducation });
   const { data: experience } = useQuery({ queryKey: ["experience"], queryFn: fetchExperience });
   const { data: socialLinks } = useQuery({ queryKey: ["social-links"], queryFn: fetchSocialLinks });
