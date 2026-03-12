@@ -10,9 +10,9 @@ const navLinks = [
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Tasks", href: "#tasks" },
   { label: "Resume", href: "#resume" },
 ];
+
 
 export default function Navbar() {
   const { data: config } = useQuery({ queryKey: ["site-config"], queryFn: fetchSiteConfig });
@@ -57,6 +57,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/assignments"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Assignments
+          </Link>
           <button
             onClick={toggleTheme}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -96,6 +102,13 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <Link
+                to="/assignments"
+                onClick={() => setMobileOpen(false)}
+                className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Assignments
+              </Link>
             </div>
           </motion.div>
         )}
